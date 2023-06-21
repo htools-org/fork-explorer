@@ -15,11 +15,28 @@ export function computeStats(blocks: IBlock[]) {
   const currentSignallingRatio =
     currentNumberOfBlocks > 0 ? currentNumberOfSignallingBlocks / currentNumberOfBlocks : 0;
   const currentSignallingPercentage = (currentSignallingRatio * 100).toFixed(2);
-  const currentSignallingRatioToAll = currentNumberOfBlocks > 0 ? currentNumberOfSignallingBlocks / 2016 : 0;
+  const currentSignallingRatioToAll =
+    currentNumberOfBlocks > 0 ? currentNumberOfSignallingBlocks / config.minerWindow : 0;
   const currentSignallingPercentageToAll = (currentSignallingRatioToAll * 100).toFixed(2);
   const estimatedSignallingBlocksLeft = Math.floor(currentSignallingRatio * blocksLeftInThisPeriod);
   const willProbablyActivate = estimatedSignallingBlocksLeft <= blocksLeftInThisPeriod && currentSignallingRatio >= 0.9;
   const currentNumberOfNonSignallingBlocks = currentNumberOfBlocks - currentNumberOfSignallingBlocks;
+
+  console.log({
+    currentNumberOfBlocks,
+    currentNumberOfSignallingBlocks,
+    currentNumberOfNonSignallingBlocks,
+    blocksLeftForActivation,
+    blocksLeftInThisPeriod,
+    lockedIn,
+    currentPeriodFailed,
+    willProbablyActivate,
+    estimatedSignallingBlocksLeft,
+    currentSignallingRatio,
+    currentSignallingRatioToAll,
+    currentSignallingPercentage,
+    currentSignallingPercentageToAll,
+  });
 
   return {
     currentNumberOfBlocks,

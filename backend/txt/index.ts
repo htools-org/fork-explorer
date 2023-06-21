@@ -36,7 +36,7 @@ export function homeTXT() {
   const totalSignalling = miners
     .filter(([_, m]) => m.signals)
     .reduce((sum, [_, m]) => sum + m.numBlocks / currentNumberOfBlocks, 0);
-  const threshold = Number.parseFloat((config.fork.threshold / 2016).toFixed(2));
+  const threshold = Number.parseFloat((config.fork.threshold / config.minerWindow).toFixed(2));
   const thresholdPercentage = Math.floor(threshold * 100);
 
   let blocksTable = "";
@@ -60,8 +60,9 @@ export function homeTXT() {
       notes.push(`${forkName} cannot be locked in within this period (90% of the blocks have to signal).`);
     else {
       if (willProbablyActivate)
-        notes.push(`Taproot will lock in with the current signalling ratio (${currentSignallingPercentage}%)!`);
-      else notes.push(`Taproot will not lock in with the current signalling ratio (${currentSignallingPercentage}%)`);
+        notes.push(`${forkName} will lock in with the current signalling ratio (${currentSignallingPercentage}%)!`);
+      else
+        notes.push(`${forkName} will not lock in with the current signalling ratio (${currentSignallingPercentage}%)`);
     }
   }
 
@@ -97,7 +98,7 @@ ${wrap80(config.fork.info.join("\n\n"))}
 
 ---
 
-Current signalling period of 2016 blocks
+Current signalling period of ${config.minerWindow} blocks
 
 ${labelPct}
 ${progressBarWithPct}

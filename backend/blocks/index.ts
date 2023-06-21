@@ -1,4 +1,4 @@
-import { getblock, getblockcount, getblockhash, getrawtransaction } from "../jsonrpc/index.ts";
+import { getblockbyheight, getblockcount, getrawtransaction } from "../jsonrpc/index.ts";
 import { IBlock } from "../../src/common/interfaces.ts";
 import { hexToAscii } from "../../src/common/utils.ts";
 import { createFakeBlock } from "../../src/common/fake-block.ts";
@@ -8,23 +8,23 @@ import miners from "../../src/common/miners.ts";
 let blocks: IBlock[] = [];
 
 async function createRealBlock(height: number): Promise<IBlock> {
-  const blockHash = await getblockhash(height);
-  const block = await getblock(blockHash);
+  // const blockHash = await getblockhash(height);
+  const block = await getblockbyheight(height);
 
   const generationTransactionTxId = block.tx[0];
   const generationTransaction = await getrawtransaction(generationTransactionTxId, block.hash);
-  const payoutAddress = generationTransaction.vout[0]?.scriptPubKey?.addresses?.[0] ?? "";
-  const coinbase = hexToAscii(generationTransaction.vin?.[0]?.coinbase ?? "");
 
+  const payoutAddress = generationTransaction.vout[0]?.scriptPubKey?.addresses?.[0] ?? "";
+  const coinbase = hexToAscii(generationTransaction.vin?.[0]?.txinwitness?.[0] ?? "");
   const minerData = (() => {
-    for (const [tag, minerInfo] of Object.entries(miners.coinbase_tags)) {
-      if (coinbase.includes(tag)) {
+    for (const [addr, minerInfo] of Object.entries(miners.payout_addresses)) {
+      if (payoutAddress == addr) {
         return minerInfo;
       }
     }
 
-    for (const [tag, minerInfo] of Object.entries(miners.payout_addresses)) {
-      if (payoutAddress == tag) {
+    for (const [tag, minerInfo] of Object.entries(miners.coinbase_tags)) {
+      if (coinbase.includes(tag)) {
         return minerInfo;
       }
     }
@@ -72,8 +72,8 @@ export async function bootstrapBlocks() {
   const callGetblockcount = config.mode === "real" ? getblockcount : async () => await Promise.resolve(1000);
 
   let blockCount = await callGetblockcount();
-  const difficultyPeriodStartHeight = blockCount - (blockCount % 2016);
-  const difficultyPeriodEndHeight = difficultyPeriodStartHeight + 2016;
+  const difficultyPeriodStartHeight = blockCount - (blockCount % config.minerWindow);
+  const difficultyPeriodEndHeight = difficultyPeriodStartHeight + config.minerWindow;
   console.log(`Current block height is ${blockCount}`);
   blocks = await setupPeriod(blockCount, difficultyPeriodStartHeight, difficultyPeriodEndHeight);
 
@@ -81,10 +81,10 @@ export async function bootstrapBlocks() {
     const newBlockCount = await callGetblockcount();
     if (newBlockCount > blockCount) {
       console.log("Found new block");
-      if (newBlockCount % 2016 === 0) {
+      if (newBlockCount % config.minerWindow === 0) {
         blockCount = newBlockCount;
-        const difficultyPeriodStartHeight = blockCount - (blockCount % 2016);
-        const difficultyPeriodEndHeight = difficultyPeriodStartHeight + 2016;
+        const difficultyPeriodStartHeight = blockCount - (blockCount % config.minerWindow);
+        const difficultyPeriodEndHeight = difficultyPeriodStartHeight + config.minerWindow;
 
         console.log(`Current block height is ${blockCount}`);
         blocks = await setupPeriod(blockCount, difficultyPeriodStartHeight, difficultyPeriodEndHeight);
@@ -93,7 +93,7 @@ export async function bootstrapBlocks() {
 
       for (let i = blockCount + 1; i <= newBlockCount; i++) {
         const block = await createBlock(i);
-        blocks[i % 2016] = block;
+        blocks[i % config.minerWindow] = block;
         console.log(`Block ${i} set`);
       }
       blockCount = newBlockCount;

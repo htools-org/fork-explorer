@@ -1,4 +1,5 @@
 import { setupPeriod } from "../backend/blocks/index.ts";
+import config from "../src/config/config.ts";
 
 const periodString = Deno.args[0];
 
@@ -14,8 +15,12 @@ if (Number.isNaN(period)) {
   Deno.exit(1);
 }
 
-const difficultyPeriodStartHeight = period * 2016;
-const difficultyPeriodEndHeight = difficultyPeriodStartHeight + 2016;
+const difficultyPeriodStartHeight = period * config.minerWindow;
+const difficultyPeriodEndHeight = difficultyPeriodStartHeight + config.minerWindow;
 
-const blocks = await setupPeriod(period * 2016 + 2016, difficultyPeriodStartHeight, difficultyPeriodEndHeight);
+const blocks = await setupPeriod(
+  period * config.minerWindow + config.minerWindow,
+  difficultyPeriodStartHeight,
+  difficultyPeriodEndHeight
+);
 await Deno.writeTextFile(Deno.cwd() + `/data/periods/${period}.json`, JSON.stringify(blocks));

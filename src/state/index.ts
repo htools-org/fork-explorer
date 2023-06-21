@@ -1,7 +1,7 @@
 import { action, Action, createStore, createTypedHooks, thunk, Thunk } from "easy-peasy";
 
 import config from "../config/config.ts";
-import { IBlock } from "../common/interfaces.ts";
+import { IBlock, IBlockchainInfo } from "../common/interfaces.ts";
 import { createFakeBlock } from "../common/fake-block.ts";
 import { ISettingsModel, settings } from "./settings.ts";
 
@@ -15,6 +15,9 @@ export interface IStoreModel {
   getBlocks: Thunk<IStoreModel>;
   setBlocks: Action<IStoreModel, IBlock[]>;
 
+  getBlockchainInfo: Thunk<IStoreModel>;
+  setBlockchainInfo: Action<IStoreModel, IBlockchainInfo[]>;
+
   getPeriod: Thunk<IStoreModel, number>;
 
   setActivePeriod: Action<IStoreModel, number | null>;
@@ -24,6 +27,7 @@ export interface IStoreModel {
   autoRefresh: Thunk<IStoreModel>;
 
   blocks: IBlock[];
+  blockchainInfo: IBlockchainInfo;
   availablePeriods: number[];
   activePeriod: number | null;
   monitoringMode: MonitoringMode;
@@ -35,6 +39,7 @@ export const model: IStoreModel = {
   initialize: thunk(async (actions) => {
     await actions.settings.initialize();
     if (config.mode !== "fake-frontend") {
+      actions.getBlockchainInfo();
       const periodsResult = await fetch("/periods");
       const periods: number[] = await periodsResult.json();
       actions.setAvailablePeriods(periods);
@@ -81,6 +86,21 @@ export const model: IStoreModel = {
     }
   }),
 
+  getBlockchainInfo: thunk(async (actions, payload) => {
+    if (config.mode === "real" || config.mode === "fake") {
+      const result = await fetch("/getblockchaininfo");
+      const json = (await result.json()) as IBlockchainInfo;
+      console.log("getblockchaininfo", json);
+      if (!json?.softforks) {
+        console.log("Got bad response from /blockchaininfo, ignoring...");
+        return;
+      }
+      actions.setBlockchainInfo(json);
+    } else {
+      console.log("WARNING: getPeriod for mode fake-frontend unimplemented!");
+    }
+  }),
+
   changeMonitoringPeriod: thunk(async (actions, period) => {
     if (period !== "current") {
       await actions.getPeriod(period);
@@ -114,11 +134,28 @@ export const model: IStoreModel = {
       } catch (error) {
         console.log("Couldn't fetch /blocks", error.message);
       }
+      try {
+        console.log("Fetching blockchaininfo");
+        const result = await fetch("/getblockchaininfo");
+        const json = (await result.json()) as IBlockchainInfo;
+        console.log("getblockchaininfo", json);
+        if (!json?.softforks) {
+          console.log("Got bad response from /blockchaininfo, ignoring...");
+          return;
+        }
+        actions.setBlockchainInfo(json);
+      } catch (error) {
+        console.log("Couldn't fetch /blockchaininfo", error.message);
+      }
     }, config.frontend.autoRefreshInterval * 1000);
   }),
 
   setBlocks: action((state, payload) => {
     state.blocks = payload;
+  }),
+
+  setBlockchainInfo: action((state, payload) => {
+    state.blockchainInfo = payload;
   }),
 
   setActivePeriod: action((state, payload) => {
@@ -130,6 +167,7 @@ export const model: IStoreModel = {
   }),
 
   blocks: [],
+  blockchainInfo: { softforks: {} },
   availablePeriods: [],
   activePeriod: null,
   monitoringMode: "current_period",

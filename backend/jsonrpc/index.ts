@@ -1,7 +1,29 @@
 import { request } from "./utils.ts";
 
-export function getblockchaininfo() {
-  return request("getblockchaininfo", []);
+interface IGetblockchainInfoResponse {
+  softforks: {
+    [name: string]: {
+      status: string;
+      bit: number;
+      startTime: number;
+      timeout: number;
+      statistics: {
+        period: number;
+        threshold: number;
+        elapsed: number;
+        count: number;
+        possible: boolean;
+      };
+    };
+  };
+}
+
+export async function getblockchaininfo() {
+  const response = await request("getblockchaininfo", []);
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+  return response.result as unknown as IGetblockchainInfoResponse;
 }
 
 type IGetblockcountResponse = number;
@@ -45,7 +67,7 @@ export async function getblockheader(hash: string) {
   if (response.error) {
     throw new Error(response.error.message);
   }
-  return (response.result as unknown) as IGetblockheaderResponse;
+  return response.result as unknown as IGetblockheaderResponse;
 }
 
 interface IGetblockResponse {
@@ -75,7 +97,15 @@ export async function getblock(hash: string) {
   if (response.error) {
     throw new Error(response.error.message);
   }
-  return (response.result as unknown) as IGetblockResponse;
+  return response.result as unknown as IGetblockResponse;
+}
+
+export async function getblockbyheight(height: number) {
+  const response = await request("getblockbyheight", [height, true]);
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+  return response.result as unknown as IGetblockResponse;
 }
 
 interface IGetrawtransaction {
@@ -119,9 +149,9 @@ interface IGetrawtransaction {
 }
 
 export async function getrawtransaction(txid: string, blockhash: string) {
-  const response = await request("getrawtransaction", [txid, true, blockhash]);
+  const response = await request("getrawtransaction", [txid, true]);
   if (response.error) {
     throw new Error(response.error.message);
   }
-  return (response.result as unknown) as IGetrawtransaction;
+  return response.result as unknown as IGetrawtransaction;
 }

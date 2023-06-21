@@ -3,7 +3,7 @@ import { SWRConfig } from "swr";
 import { Helmet } from "react-helmet";
 import { Route, Switch } from "wouter";
 import ultraCache from "ultra/cache";
-import { Cache } from "https://deno.land/x/ultra/src/types.ts";
+import { Cache } from "https://deno.land/x/ultra/lib/types.ts";
 import { ThemeProvider, withTheme } from "styled-components";
 import { StoreProvider } from "easy-peasy";
 

@@ -62,7 +62,7 @@ export default function Stats() {
       };
     });
 
-  const xAxisTickValues = new Array(2016 / 144 + 1).fill(0).map((day, i) => {
+  const xAxisTickValues = new Array(config.minerWindow / 144 + 1).fill(0).map((day, i) => {
     return blocks[0].height + i * 144;
   });
 
@@ -78,7 +78,7 @@ export default function Stats() {
     tickLabels: { fill: theme.stats.labelColor },
   };
 
-  const thresholdPercentage = Math.floor((config.fork.threshold / 2016) * 100);
+  const thresholdPercentage = Math.floor((config.fork.threshold / config.minerWindow) * 100);
 
   return (
     <Container>
@@ -110,7 +110,7 @@ export default function Stats() {
                 labels={() => null}
                 style={{ data: { stroke: "#999" } }}
                 domain={{ x: [data[0].height, data[data.length - 1].height] }}
-                y={() => config.fork.threshold / 2016}
+                y={() => config.fork.threshold / config.minerWindow}
               />
               <VictoryLine data={data} x="height" y="ratio" style={lineStyle} />
             </VictoryContainer>
@@ -162,7 +162,7 @@ export default function Stats() {
                 labels={() => null}
                 style={{ data: { stroke: "#999" } }}
                 domain={{ x: [data[0].height, data[data.length - 1].height] }}
-                y={() => config.fork.threshold / 2016}
+                y={() => config.fork.threshold / config.minerWindow}
               />
               <VictoryLine data={data} x="height" y="ratio" style={lineStyle} />
             </VictoryChart> */}

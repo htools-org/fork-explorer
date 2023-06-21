@@ -16,3 +16,22 @@ export interface IMinerData {
 export interface IMiners {
   [key: string]: IMinerData;
 }
+
+export interface IBlockchainInfo {
+  blocks: number;
+  softforks: {
+    [name: string]: {
+      status: string;
+      bit: number;
+      startTime: number;
+      timeout: number;
+      statistics: {
+        period: number;
+        threshold: number;
+        elapsed: number;
+        count: number;
+        possible: boolean;
+      };
+    };
+  };
+}

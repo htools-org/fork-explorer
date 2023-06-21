@@ -8,6 +8,7 @@ import CommonHeader from "./CommonHeader.ts";
 import { useStoreState } from "../state/index.ts";
 import config from "../config/config.ts";
 import { computeStats } from "../common/data.ts";
+import { IBlockchainInfo } from "../common/interfaces.ts";
 
 const StatusContainer = styled.div`
   margin: auto;
@@ -82,9 +83,18 @@ function showConfetti() {
 
 export default function LockedIn() {
   const blocks = useStoreState((store) => store.blocks);
+  const blockchainInfo: IBlockchainInfo = useStoreState((store) => store.blockchainInfo);
   const forkName = config.fork.name;
-  let status = config.fork.status;
-  const { lockedIn } = computeStats(blocks);
+  // let status = config.fork.status;
+  console.log("remote fork status", blockchainInfo.softforks[config.fork.codename]?.status);
+
+  const status = blockchainInfo.softforks[config.fork.codename]?.status || config.fork.status;
+  const { lockedIn, blocksLeftInThisPeriod } = computeStats(blocks);
+
+  const blocksToActive =
+    (status === "locked_in" ? 0 : 1) * config.minerWindow +
+      (config.minerWindow - (blockchainInfo.blocks % config.minerWindow)) -
+      1 || config.minerWindow;
 
   useEffect(() => {
     if (config.fork.showCelebrationConfetti) {
@@ -92,13 +102,13 @@ export default function LockedIn() {
     }
   }, []);
 
-  const currentBlockheight = (blocks.find((block) => block.signals === undefined)?.height ?? 0) - 1;
+  // const currentBlockheight = (blocks.find((block) => block.signals === undefined)?.height ?? 0) - 1;
 
-  if (currentBlockheight >= config.fork.activationHeight) {
-    // Just hack this one until we utilize `bitcoin-cli getblockchainfo`
-    // instead of hardcoding the status in the config file
-    status = "active";
-  }
+  // if (currentBlockheight >= config.fork.activationHeight) {
+  //   // Just hack this one until we utilize `bitcoin-cli getblockchainfo`
+  //   // instead of hardcoding the status in the config file
+  //   status = "active";
+  // }
 
   const showActivationCountdown = config.fork.showActivationCountdown && status !== "active";
 
@@ -124,11 +134,13 @@ export default function LockedIn() {
       )}
       {showActivationCountdown && (
         <>
-          <CountdownHeader>{config.fork.name} activates in</CountdownHeader>
-          <Countdown>
-            {formatDistanceToNow(addMinutes(new Date(), (config.fork.activationHeight - currentBlockheight) * 10), {})}
-          </Countdown>
-          <CountdownBlocks>{config.fork.activationHeight - currentBlockheight} blocks left</CountdownBlocks>
+          <CountdownHeader>
+            {config.fork.name}
+            {status === "locked_in" ? " is locked in and " : " "}
+            activates in
+          </CountdownHeader>
+          <Countdown>{formatDistanceToNow(addMinutes(new Date(), blocksToActive * 10), {})}</Countdown>
+          <CountdownBlocks>{blocksToActive} blocks left</CountdownBlocks>
         </>
       )}
       {config.frontend.celebrate && <Video src={config.frontend.celebrate.url} controls />}

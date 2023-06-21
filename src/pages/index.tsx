@@ -20,6 +20,7 @@ import FinalBlockCountdown from "../components/FinalBlockCountdown.tsx";
 import { useStoreState } from "../state/index.ts";
 import Body from "../components/Body.ts";
 import ForkCompleted from "../components/ForkCompleted.tsx";
+import { IBlockchainInfo } from "../common/interfaces.ts";
 
 const DescriptionBlock = styled.div`
   max-width: 600px;
@@ -56,8 +57,10 @@ const BootstrappingInProgress = styled.p`
 
 export default function Blocks() {
   const blocks = useStoreState((store) => store.blocks);
+  const blockchainInfo: IBlockchainInfo = useStoreState((store) => store.blockchainInfo);
   const forkName = config.fork.name;
-  const status = config.fork.status;
+  // const status = config.fork.status;
+  const status = blockchainInfo.softforks[config.fork.codename]?.status || config.fork.status;
   const {
     blocksLeftForActivation,
     lockedIn,
@@ -74,8 +77,27 @@ export default function Blocks() {
     selectedMiner = undefined;
   }
   const selectedBlock = params.get("block");
-  const thresholdPercentage = Math.floor((config.fork.threshold / 2016) * 100);
+  const thresholdPercentage = Math.floor((config.fork.threshold / config.minerWindow) * 100);
   const forkCompleted = monitoringMode === "current_period" && (lockedIn || ["locked_in", "active"].includes(status));
+
+  if (status === "defined") {
+    return (
+      <Container>
+        <head>
+          <title>{forkName} activation</title>
+        </head>
+        <ContentWide>
+          <SiteTitle />
+          <SiteMenu />
+          <Body style={{ paddingLeft: 18, paddingRight: 18, textAlign: "center" }}>
+            <p>
+              starts on {new Date(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).toLocaleString()}
+            </p>
+          </Body>
+        </ContentWide>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -106,7 +128,7 @@ export default function Blocks() {
               </DescriptionBlock>
               {blocks.length > 0 && <ProgressBar />}
               <TopSection>
-                <CurrentPeriod>Current signalling period of 2016 blocks (2 weeks)</CurrentPeriod>
+                <CurrentPeriod>Current signalling period of {config.minerWindow} blocks (2 weeks)</CurrentPeriod>
                 {/* <LockinInfo>90% of blocks within the period have to signal.</LockinInfo> */}
                 <LockinInfo>
                   {lockedIn && <>{forkName.toUpperCase()} IS LOCKED IN FOR DEPLOYMENT!</>}
