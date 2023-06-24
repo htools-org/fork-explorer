@@ -14,7 +14,7 @@ async function createRealBlock(height: number): Promise<IBlock> {
   const generationTransactionTxId = block.tx[0];
   const generationTransaction = await getrawtransaction(generationTransactionTxId, block.hash);
 
-  const payoutAddress = generationTransaction.vout[0]?.scriptPubKey?.addresses?.[0] ?? "";
+  const payoutAddress = generationTransaction.vout[0]?.address?.string ?? "";
   const coinbase = hexToAscii(generationTransaction.vin?.[0]?.txinwitness?.[0] ?? "");
   const minerData = (() => {
     for (const [addr, minerInfo] of Object.entries(miners.payout_addresses)) {

@@ -91,8 +91,9 @@ export default function Blocks() {
           <SiteMenu />
           <Body style={{ paddingLeft: 18, paddingRight: 18, textAlign: "center" }}>
             <p>
-              starts on {new Date(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).toLocaleString()}
+              starts at: {new Date(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).toLocaleString()}
             </p>
+            <p>current chain time: {new Date(blockchainInfo.mediantime * 1000).toLocaleString()}</p>
           </Body>
         </ContentWide>
       </Container>

@@ -133,12 +133,10 @@ interface IGetrawtransaction {
     {
       value: number;
       n: number;
-      scriptPubKey?: {
-        asm: string;
-        hex: string;
-        reqSigs: number;
-        type: string;
-        addresses: string[];
+      address: {
+        version: number;
+        hash: string;
+        string: string;
       };
     }
   ];

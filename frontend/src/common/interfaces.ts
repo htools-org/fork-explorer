@@ -19,6 +19,7 @@ export interface IMiners {
 
 export interface IBlockchainInfo {
   blocks: number;
+  mediantime: number;
   softforks: {
     [name: string]: {
       status: string;

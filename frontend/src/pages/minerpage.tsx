@@ -72,7 +72,7 @@ export default function Minersx(props: { miner: string }) {
                 <MinerBlock key={block.height}>
                   <Text>
                     {block.signals ? "✅ " : "🚫"} Block #
-                    <Link href={`https://mempool.space/block/${block.height}?showDetails=true`} target="_blank">
+                    <Link href={`https://hnsnetwork.com/blocks/${block.height}`} target="_blank">
                       {block.height}
                     </Link>
                     <Locate href={`/?block=${block.height}`}>🔍</Locate>

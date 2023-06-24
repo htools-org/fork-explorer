@@ -47,7 +47,7 @@ Miner: ${miner ?? "Unknown"}
 Signalling: ${signals ? "Yes" : "No"}`;
 
   return (
-    <a href={`https://mempool.space/block/${height}?showDetails=true`} target="_blank">
+    <a href={`https://hnsnetwork.com/blocks/${height}`} target="_blank">
       <BlockStyle title={hover} signals={signals} selected={selected} big={big}></BlockStyle>
     </a>
   );

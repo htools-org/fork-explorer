@@ -105,7 +105,7 @@ const App = () => {
         <StoreStarter>
           <>
             <a
-              href="https://github.com/hsjoberg/fork-explorer"
+              href="https://github.com/htools-org/fork-explorer"
               className="github-corner"
               aria-label="View source on GitHub"
             >
