@@ -22,23 +22,7 @@ export function computeStats(blocks: IBlock[]) {
   const willProbablyActivate = estimatedSignallingBlocksLeft <= blocksLeftInThisPeriod && currentSignallingRatio >= 0.9;
   const currentNumberOfNonSignallingBlocks = currentNumberOfBlocks - currentNumberOfSignallingBlocks;
 
-  console.log({
-    currentNumberOfBlocks,
-    currentNumberOfSignallingBlocks,
-    currentNumberOfNonSignallingBlocks,
-    blocksLeftForActivation,
-    blocksLeftInThisPeriod,
-    lockedIn,
-    currentPeriodFailed,
-    willProbablyActivate,
-    estimatedSignallingBlocksLeft,
-    currentSignallingRatio,
-    currentSignallingRatioToAll,
-    currentSignallingPercentage,
-    currentSignallingPercentageToAll,
-  });
-
-  return {
+  const stats = {
     currentNumberOfBlocks,
     currentNumberOfSignallingBlocks,
     currentNumberOfNonSignallingBlocks,
@@ -53,6 +37,9 @@ export function computeStats(blocks: IBlock[]) {
     currentSignallingPercentage,
     currentSignallingPercentageToAll,
   };
+  console.log("stats:", stats);
+
+  return stats;
 }
 
 export function computeMiners(blocks: IBlock[]): [string, IMinerData][] {

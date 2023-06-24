@@ -5,7 +5,6 @@ import { getblockchaininfo, getblockcount } from "../jsonrpc/index.ts";
 
 export const GetBlockchainInfo: RouterMiddleware<any, any, any> = async (context) => {
   const info = await getblockchaininfo();
-  console.log(info);
   context.response.body = info;
 };
 

@@ -43,7 +43,6 @@ export default function Minersx(props: { miner: string }) {
   const blocks = useStoreState((store) => store.blocks);
   const forkName = config.fork.name;
   const name = props.miner;
-  console.log(name);
   let searchName: string | undefined = name;
   if (searchName === "Unrecognized miners") {
     searchName = undefined;

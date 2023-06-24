@@ -56,7 +56,6 @@ export const model: IStoreModel = {
     if (config.mode === "real" || config.mode === "fake") {
       const result = await fetch(API_BASE_URL + "/blocks");
       const json = (await result.json()) as IBlock[];
-      console.log(json);
       actions.setBlocks(json);
     } else {
       const start = 100000;
@@ -92,7 +91,6 @@ export const model: IStoreModel = {
     if (config.mode === "real" || config.mode === "fake") {
       const result = await fetch(API_BASE_URL + "/getblockchaininfo");
       const json = (await result.json()) as IBlockchainInfo;
-      console.log("getblockchaininfo", json);
       if (!json?.softforks) {
         console.log("Got bad response from /blockchaininfo, ignoring...");
         return;
@@ -140,7 +138,6 @@ export const model: IStoreModel = {
         console.log("Fetching blockchaininfo");
         const result = await fetch(API_BASE_URL + "/getblockchaininfo");
         const json = (await result.json()) as IBlockchainInfo;
-        console.log("getblockchaininfo", json);
         if (!json?.softforks) {
           console.log("Got bad response from /blockchaininfo, ignoring...");
           return;

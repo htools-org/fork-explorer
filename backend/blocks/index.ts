@@ -8,7 +8,6 @@ import miners from "../../frontend/src/common/miners.ts";
 let blocks: IBlock[] = [];
 
 async function createRealBlock(height: number): Promise<IBlock> {
-  // const blockHash = await getblockhash(height);
   const block = await getblockbyheight(height);
 
   const generationTransactionTxId = block.tx[0];

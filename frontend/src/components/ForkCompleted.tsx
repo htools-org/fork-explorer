@@ -86,11 +86,9 @@ export default function LockedIn() {
   const blocks = useStoreState((store) => store.blocks);
   const blockchainInfo: IBlockchainInfo = useStoreState((store) => store.blockchainInfo);
   const forkName = config.fork.name;
-  // let status = config.fork.status;
-  console.log("remote fork status", blockchainInfo.softforks[config.fork.codename]?.status);
 
   const status = blockchainInfo.softforks[config.fork.codename]?.status || config.fork.status;
-  const { lockedIn, blocksLeftInThisPeriod } = computeStats(blocks);
+  const { lockedIn } = computeStats(blocks);
 
   const blocksToActive =
     (status === "locked_in" ? 0 : 1) * config.minerWindow +
@@ -102,14 +100,6 @@ export default function LockedIn() {
       showConfetti();
     }
   }, []);
-
-  // const currentBlockheight = (blocks.find((block) => block.signals === undefined)?.height ?? 0) - 1;
-
-  // if (currentBlockheight >= config.fork.activationHeight) {
-  //   // Just hack this one until we utilize `bitcoin-cli getblockchainfo`
-  //   // instead of hardcoding the status in the config file
-  //   status = "active";
-  // }
 
   const showActivationCountdown = config.fork.showActivationCountdown && status !== "active";
 

@@ -15,13 +15,6 @@ import Settings from "./pages/settings.tsx";
 import Miner from "./pages/minerpage.tsx";
 import config from "./config/config.ts";
 
-// const Index = lazy(() => import("./pages/index.tsx"));
-// const About = lazy(() => import("./pages/about.tsx"));
-// const Miners = lazy(() => import("./pages/miners.tsx"));
-// const Stats = lazy(() => import("./pages/stats.tsx"));
-// const Settings = lazy(() => import("./pages/settings.tsx"));
-// const Miner = lazy(() => import("./pages/minerx.tsx"));
-
 const forkName = config.fork.name;
 const twitterHandle = config.frontend.twitterHandle;
 
