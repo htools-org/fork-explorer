@@ -35,12 +35,14 @@ export interface IStoreModel {
   settings: ISettingsModel;
 }
 
+const API_BASE_URL = "http://127.0.0.1:8080/api";
+
 export const model: IStoreModel = {
   initialize: thunk(async (actions) => {
     await actions.settings.initialize();
     if (config.mode !== "fake-frontend") {
       actions.getBlockchainInfo();
-      const periodsResult = await fetch("/periods");
+      const periodsResult = await fetch(API_BASE_URL + "/periods");
       const periods: number[] = await periodsResult.json();
       actions.setAvailablePeriods(periods);
     }
@@ -52,7 +54,7 @@ export const model: IStoreModel = {
 
   getBlocks: thunk(async (actions) => {
     if (config.mode === "real" || config.mode === "fake") {
-      const result = await fetch(`/blocks`);
+      const result = await fetch(API_BASE_URL + "/blocks");
       const json = (await result.json()) as IBlock[];
       console.log(json);
       actions.setBlocks(json);
@@ -78,7 +80,7 @@ export const model: IStoreModel = {
 
   getPeriod: thunk(async (actions, payload) => {
     if (config.mode === "real" || config.mode === "fake") {
-      const result = await fetch(`/period/${payload}`);
+      const result = await fetch(API_BASE_URL + `/period/${payload}`);
       const json = (await result.json()) as IBlock[];
       actions.setBlocks(json);
     } else {
@@ -88,7 +90,7 @@ export const model: IStoreModel = {
 
   getBlockchainInfo: thunk(async (actions, payload) => {
     if (config.mode === "real" || config.mode === "fake") {
-      const result = await fetch("/getblockchaininfo");
+      const result = await fetch(API_BASE_URL + "/getblockchaininfo");
       const json = (await result.json()) as IBlockchainInfo;
       console.log("getblockchaininfo", json);
       if (!json?.softforks) {
@@ -124,7 +126,7 @@ export const model: IStoreModel = {
       }
       try {
         console.log("Fetching blocks");
-        const result = await fetch("/blocks");
+        const result = await fetch(API_BASE_URL + "/blocks");
         const json = (await result.json()) as IBlock[];
         if (json && json.length === 0) {
           console.log("Got empty response from /blocks, ignoring...");
@@ -136,7 +138,7 @@ export const model: IStoreModel = {
       }
       try {
         console.log("Fetching blockchaininfo");
-        const result = await fetch("/getblockchaininfo");
+        const result = await fetch(API_BASE_URL + "/getblockchaininfo");
         const json = (await result.json()) as IBlockchainInfo;
         console.log("getblockchaininfo", json);
         if (!json?.softforks) {

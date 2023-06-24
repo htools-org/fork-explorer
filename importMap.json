@@ -1,15 +1,6 @@
 {
   "imports": {
     "react": "https://esm.sh/stable/react",
-    "react-dom": "https://esm.sh/stable/react-dom",
-    "react-dom/server": "https://esm.sh/react-dom/server",
-    "react-helmet": "https://esm.sh/react-helmet-async",
-    "wouter": "https://esm.sh/wouter",
-    "swr": "https://esm.sh/swr",
-    "ultra/cache": "https://deno.land/x/ultra@v0.8.0/cache.js",
-    "styled-components": "https://esm.sh/styled-components",
-    "easy-peasy": "https://esm.sh/easy-peasy@5.0.4",
-    "victory": "https://esm.sh/victory@36.3.2",
     "app": "./src/app.tsx"
   }
 }

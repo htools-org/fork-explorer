@@ -1,9 +1,7 @@
-import React, { lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SWRConfig } from "swr";
 import { Helmet } from "react-helmet";
 import { Route, Switch } from "wouter";
-import ultraCache from "ultra/cache";
-import { Cache } from "https://deno.land/x/ultra/lib/types.ts";
 import { ThemeProvider, withTheme } from "styled-components";
 import { StoreProvider } from "easy-peasy";
 
@@ -26,11 +24,6 @@ import config from "./config/config.ts";
 
 const forkName = config.fork.name;
 const twitterHandle = config.frontend.twitterHandle;
-
-const options = (cache: Cache) => ({
-  provider: () => ultraCache(cache),
-  suspense: true,
-});
 
 function StoreStarter(props: any) {
   const [gotBlocks, setGotBlocks] = useState(false);
@@ -105,10 +98,10 @@ function StoreStarter(props: any) {
   );
 }
 
-const Ultra = ({ cache }: { cache: Cache }) => {
+const App = () => {
   return (
     <StoreProvider store={store}>
-      <SWRConfig value={options(cache)}>
+      <SWRConfig value={{}}>
         <StoreStarter>
           <>
             <a
@@ -159,4 +152,4 @@ const Ultra = ({ cache }: { cache: Cache }) => {
   );
 };
 
-export default withTheme(Ultra);
+export default withTheme(App);

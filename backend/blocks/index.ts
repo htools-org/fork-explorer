@@ -1,9 +1,9 @@
 import { getblockbyheight, getblockcount, getrawtransaction } from "../jsonrpc/index.ts";
-import { IBlock } from "../../src/common/interfaces.ts";
-import { hexToAscii } from "../../src/common/utils.ts";
-import { createFakeBlock } from "../../src/common/fake-block.ts";
-import config from "../../src/config/config.ts";
-import miners from "../../src/common/miners.ts";
+import { IBlock } from "../../frontend/src/common/interfaces.ts";
+import { hexToAscii } from "../../frontend/src/common/utils.ts";
+import { createFakeBlock } from "../../frontend/src/common/fake-block.ts";
+import config from "../../frontend/src/config/config.ts";
+import miners from "../../frontend/src/common/miners.ts";
 
 let blocks: IBlock[] = [];
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { QRCode } from "https://esm.sh/react-qr-svg";
-import { bech32 } from "https://esm.sh/bech32?es2020";
+// import { QRCode } from "https://esm.sh/react-qr-svg";
+// import { bech32 } from "https://esm.sh/bech32?es2020";
 
 import config from "../config/config.ts";
 import { bytesToString } from "../common/utils.ts";
@@ -63,11 +63,11 @@ export const ConnectToNodeData = styled.p`
   margin-top: 0;
 `;
 
-const lnurlPayBech32 = bech32.encode(
-  "lnurl",
-  bech32.toWords(new TextEncoder().encode(config.donation?.lnurlPayUrl)),
-  1024
-);
+const lnurlPayBech32 = ""; // bech32.encode(
+//   "lnurl",
+//   bech32.toWords(new TextEncoder().encode(config.donation?.lnurlPayUrl)),
+//   1024
+// );
 
 export function Donation() {
   const [type, setType] = useState<"lnurl-pay" | "bolt11">("lnurl-pay");
@@ -79,8 +79,8 @@ export function Donation() {
   };
 
   const decodeLnUrlPay = async () => {
-    const decodedBech32 = bech32.decode(invoice!, 1024);
-    const decodedUrl = bytesToString(bech32.fromWords(decodedBech32.words));
+    const decodedBech32 = ""; //bech32.decode(invoice!, 1024);
+    const decodedUrl = ""; //bytesToString(bech32.fromWords(decodedBech32.words));
 
     const result = await fetch(decodedUrl);
     const resultJson = await result.json();
@@ -119,12 +119,12 @@ export function Donation() {
             {type === "bolt11" && <>LN Invoice</>} QR code:
           </InvoiceText>
           <div style={{ cursor: "pointer" }} onClick={onClickInvoice}>
-            <QRCode
+            {/* <QRCode
               bgColor="#FFFFFF"
               fgColor="#000000"
               value={invoice.toUpperCase()}
               style={{ border: "8px solid #fff", width: 200 }}
-            />
+            /> */}
           </div>
           <Bolt11Text onClick={onClickInvoice}>{invoice}</Bolt11Text>
           {type == "lnurl-pay" && (

@@ -8,20 +8,20 @@ import { GetPeriods } from "./periods.ts";
 
 const router = new Router();
 
-router.get("/blocks", GetBlocks);
+router.get("/api/blocks", GetBlocks);
 
-router.get("/periods", GetPeriods);
+router.get("/api/periods", GetPeriods);
 
-router.get("/period/:period", GetPeriod);
+router.get("/api/period/:period", GetPeriod);
 
-router.get("/invoice", LnurlPayRequest);
+router.get("/api/invoice", LnurlPayRequest);
 
-router.get("/invoice/callback", LnurlPayRequestCallback);
+router.get("/api/invoice/callback", LnurlPayRequestCallback);
 
-router.get("/getblockchaininfo", GetBlockchainInfo);
+router.get("/api/getblockchaininfo", GetBlockchainInfo);
 
-router.get<any, { height: string }>("/getblockhash/:height", GetBlockHash);
+router.get<any, { height: string }>("/api/getblockhash/:height", GetBlockHash);
 
-router.get("/getblockcount", GetBlockCount);
+router.get("/api/getblockcount", GetBlockCount);
 
 export default router;

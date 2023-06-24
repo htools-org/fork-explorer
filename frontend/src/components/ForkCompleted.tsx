@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import confetti from "https://cdn.skypack.dev/canvas-confetti@1.4.0";
-import addMinutes from "https://deno.land/x/date_fns@v2.15.0/addMinutes/index.js";
-import formatDistanceToNow from "https://deno.land/x/date_fns@v2.15.0/formatDistanceToNow/index.js";
+import confetti from "canvas-confetti";
+// import confetti from "https://cdn.skypack.dev/canvas-confetti@1.4.0";
+// import addMinutes from "https://deno.land/x/date_fns@v2.15.0/addMinutes/index.js";
+// import formatDistanceToNow from "https://deno.land/x/date_fns@v2.15.0/formatDistanceToNow/index.js";
 
 import CommonHeader from "./CommonHeader.ts";
 import { useStoreState } from "../state/index.ts";
@@ -139,7 +140,7 @@ export default function LockedIn() {
             {status === "locked_in" ? " is locked in and " : " "}
             activates in
           </CountdownHeader>
-          <Countdown>{formatDistanceToNow(addMinutes(new Date(), blocksToActive * 10), {})}</Countdown>
+          {/* <Countdown>{formatDistanceToNow(addMinutes(new Date(), blocksToActive * 10), {})}</Countdown> */}
           <CountdownBlocks>{blocksToActive} blocks left</CountdownBlocks>
         </>
       )}

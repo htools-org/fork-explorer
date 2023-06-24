@@ -1,0 +1,25 @@
+{
+  "name": "fork-explorer",
+  "version": "0.0.0",
+  "description": "Fork Explorer let's you see the status of a BIP9-style softfork. It relies on bitcoind and its JSON-RPC server.",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "canvas-confetti": "^1.6.0",
+    "easy-peasy": "^6.0.1",
+    "esbuild": "0.18.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "styled-components": "5.3",
+    "swr": "^2.1.5",
+    "victory": "^36.6.11",
+    "esbuild-plugin-copy": "^2.1.1",
+    "wouter": "^2.11.0"
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import addMinutes from "https://deno.land/x/date_fns@v2.15.0/addMinutes/index.js";
-import formatDistanceToNow from "https://deno.land/x/date_fns@v2.15.0/formatDistanceToNow/index.js";
+// import addMinutes from "https://deno.land/x/date_fns@v2.15.0/addMinutes/index.js";
+// import formatDistanceToNow from "https://deno.land/x/date_fns@v2.15.0/formatDistanceToNow/index.js";
 
 import config from "../config/config.ts";
 import { computeStats } from "../common/data.ts";
@@ -117,8 +117,8 @@ export default function Blocks() {
                   The current period cannot lock in {forkName}.
                   <br />
                   The next period starts in
-                  {" " + formatDistanceToNow(addMinutes(new Date(), blocksLeftInThisPeriod * 10), {}) + " "}(
-                  {blocksLeftInThisPeriod} block{blocksLeftInThisPeriod > 1 && "s"})
+                  {/* {" " + formatDistanceToNow(addMinutes(new Date(), blocksLeftInThisPeriod * 10), {}) + " "}(
+                  {blocksLeftInThisPeriod} block{blocksLeftInThisPeriod > 1 && "s"}) */}
                 </CannotLockInInfo>
               )}
               <DescriptionBlock>

@@ -1,5 +1,5 @@
 import { setupPeriod } from "../backend/blocks/index.ts";
-import config from "../src/config/config.ts";
+import config from "../frontend/src/config/config.ts";
 
 const periodString = Deno.args[0];
 
