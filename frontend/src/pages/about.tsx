@@ -6,7 +6,6 @@ import config from "../config/config.ts";
 
 import { Container } from "../components/Container.ts";
 import { Content } from "../components/Content.ts";
-import { Donation } from "../components/Donation.tsx";
 import SiteTitle from "../components/SiteTitle.tsx";
 import SiteMenu from "../components/SiteMenu.tsx";
 import Text from "../components/Text.tsx";
@@ -117,7 +116,6 @@ export default function Blocks() {
           )}
         </Body>
         {config.frontend.twitterHandle && <ContactTwitter />}
-        {config.donation && <Donation />}
       </Content>
     </Container>
   );

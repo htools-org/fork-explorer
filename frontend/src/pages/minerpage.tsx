@@ -9,7 +9,6 @@ import { Content } from "../components/Content.ts";
 import SiteTitle from "../components/SiteTitle.tsx";
 import { useStoreState } from "../state/index.ts";
 import SiteMenu from "../components/SiteMenu.tsx";
-import { Donation } from "../components/Donation.tsx";
 import ContactTwitter from "../components/ContactTwitter.tsx";
 import CommonHeader from "../components/CommonHeader.ts";
 import Text from "../components/Text.tsx";
@@ -83,7 +82,6 @@ export default function Minersx(props: { miner: string }) {
           </MinerBlocksContainer>
         </Body>
         {config.frontend.twitterHandle && <ContactTwitter />}
-        {config.donation && <Donation />}
       </Content>
     </Container>
   );

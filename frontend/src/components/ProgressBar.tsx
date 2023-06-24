@@ -5,12 +5,6 @@ import { computeStats } from "../common/data.ts";
 import { useStoreState } from "../state/index.ts";
 import config from "../config/config.ts";
 
-export const DonateContainer = styled.div`
-  margin: 0 auto 100px;
-  max-width: 400px;
-  text-align: center;
-`;
-
 const Container = styled.div`
   padding: 10px 0;
   margin-top: 35px;

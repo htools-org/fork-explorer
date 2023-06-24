@@ -8,7 +8,6 @@ import { useStoreActions, useStoreState } from "../state/index.ts";
 import { Theme } from "../state/settings.ts";
 import { Container } from "../components/Container.ts";
 import { Content } from "../components/Content.ts";
-import { Donation } from "../components/Donation.tsx";
 import SiteTitle from "../components/SiteTitle.tsx";
 import SiteMenu from "../components/SiteMenu.tsx";
 import Text from "../components/Text.tsx";
@@ -127,7 +126,6 @@ export default function Settings() {
           </SettingsContainer>
         </Body>
         {config.frontend.twitterHandle && <ContactTwitter />}
-        {config.donation && <Donation />}
       </Content>
     </Container>
   );

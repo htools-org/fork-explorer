@@ -66,14 +66,6 @@ export function homeTXT() {
     }
   }
 
-  const donation = config.donation
-    ? `
----
-
-Donate via Lightning Network:
-${bech32.encode("lnurl", bech32.toWords(new TextEncoder().encode(config.donation?.lnurlPayUrl)), 1024)}`
-    : "";
-
   const progressBar =
     ">".repeat(Math.ceil(currentNumberOfSignallingBlocks / 25)) +
     "-".repeat(Math.ceil(blocksLeftInThisPeriod / 25)) +
@@ -125,6 +117,5 @@ ${miners
   })
   .join("\n")}
 
-${donation}
 `;
 }

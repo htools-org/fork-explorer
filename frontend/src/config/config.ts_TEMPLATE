@@ -79,25 +79,6 @@ interface Config {
       imageUri: string;
     }[];
   };
-
-  // Donation configuration, right now only supports lnd
-  donation?: {
-    // Backend type, currently only supports lnd
-    type: "lnd";
-    // Data for the backend
-    data: {
-      // REST server
-      server: string;
-      // Path to tls.cert
-      cert: string;
-      // Path to invoice.macaroon
-      macaroon: string;
-      // Lightning Node URI <pubkey>@<ip:port>
-      lightningNodeUri?: string;
-    };
-    // URL to the LNURL-pay endpoint
-    lnurlPayUrl: string;
-  };
 }
 
 const config: Config = {
@@ -151,17 +132,6 @@ const config: Config = {
     },
     sponsors: [],
   },
-
-  // donation: {
-  //   type: "lnd",
-  //   data: {
-  //     server: "https://127.0.0.1:8080",
-  //     cert: "/path/to/tls.cert",
-  //     macaroon: "/path/to/invoice.macaroon",
-  //     lightningNodeUri: "pubkey@ip:port"
-  //   },
-  //   lnurlPayUrl: "https://domain.com/invoice",
-  // },
 };
 
 export default config;

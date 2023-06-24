@@ -9,7 +9,6 @@ import { computeStats } from "../common/data.ts";
 import { Container } from "../components/Container.ts";
 import { ContentWide } from "../components/Content.ts";
 import { BlockContainer, Block, EmptyBlock } from "../components/Block.tsx";
-import { Donation } from "../components/Donation.tsx";
 import SiteTitle from "../components/SiteTitle.tsx";
 import SiteMenu from "../components/SiteMenu.tsx";
 import ProgressBar from "../components/ProgressBar.tsx";
@@ -192,7 +191,6 @@ export default function Blocks() {
           )}
         </Body>
         {config.frontend.twitterHandle && <ContactTwitter />}
-        {config.donation && <Donation />}
       </ContentWide>
     </Container>
   );

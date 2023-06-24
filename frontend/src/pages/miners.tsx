@@ -11,7 +11,6 @@ import { Content } from "../components/Content.ts";
 import SiteTitle from "../components/SiteTitle.tsx";
 import { useStoreState } from "../state/index.ts";
 import SiteMenu from "../components/SiteMenu.tsx";
-import { Donation } from "../components/Donation.tsx";
 import ContactTwitter from "../components/ContactTwitter.tsx";
 import CommonHeader from "../components/CommonHeader.ts";
 import { IMinerData } from "../common/interfaces.ts";
@@ -251,7 +250,6 @@ export default function Miners() {
           </Table>
         </Body>
         {config.frontend.twitterHandle && <ContactTwitter />}
-        {config.donation && <Donation />}
       </Content>
     </Container>
   );
