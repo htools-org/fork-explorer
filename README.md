@@ -1,4 +1,10 @@
-# Fork Explorer
+# Fork Explorer for Handshake
+
+**[https://forkwatch.htools.work](https://forkwatch.htools.work)**
+
+This is a fork (pun intended) of [hsjoberg/fork-explorer](https://github.com/hsjoberg/fork-explorer) for [Handshake](https://handshake.org). Readme from the source project below, usage and how to run is probably out of date.
+
+---
 
 Fork Explorer let's you see the status of a BIP9-style softfork. It relies on bitcoind and its JSON-RPC server.
 
