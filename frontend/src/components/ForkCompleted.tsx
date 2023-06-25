@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import confetti from "canvas-confetti";
-// import confetti from "https://cdn.skypack.dev/canvas-confetti@1.4.0";
-// import addMinutes from "https://deno.land/x/date_fns@v2.15.0/addMinutes/index.js";
-// import formatDistanceToNow from "https://deno.land/x/date_fns@v2.15.0/formatDistanceToNow/index.js";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime.js";
 
 import CommonHeader from "./CommonHeader.ts";
 import { useStoreState } from "../state/index.ts";
 import config from "../config/config.ts";
 import { computeStats } from "../common/data.ts";
 import { IBlockchainInfo } from "../common/interfaces.ts";
+
+dayjs.extend(relativeTime);
 
 const StatusContainer = styled.div`
   margin: auto;
@@ -130,7 +131,11 @@ export default function LockedIn() {
             {status === "locked_in" ? " is locked in and " : " "}
             activates in
           </CountdownHeader>
-          {/* <Countdown>{formatDistanceToNow(addMinutes(new Date(), blocksToActive * 10), {})}</Countdown> */}
+          <Countdown>
+            {dayjs()
+              .add(blocksToActive * 10, "minutes")
+              .fromNow()}
+          </Countdown>
           <CountdownBlocks>{blocksToActive} blocks left</CountdownBlocks>
         </>
       )}
