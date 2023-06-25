@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import addMinutes from "https://deno.land/x/date_fns@v2.15.0/addMinutes/index.js";
-// import formatDistanceToNow from "https://deno.land/x/date_fns@v2.15.0/formatDistanceToNow/index.js";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime.js";
 
 import config from "../config/config.ts";
 import { computeStats } from "../common/data.ts";
@@ -20,6 +20,8 @@ import { useStoreState } from "../state/index.ts";
 import Body from "../components/Body.ts";
 import ForkCompleted from "../components/ForkCompleted.tsx";
 import { IBlockchainInfo } from "../common/interfaces.ts";
+
+dayjs.extend(relativeTime);
 
 const DescriptionBlock = styled.div`
   max-width: 600px;
@@ -90,7 +92,8 @@ export default function Blocks() {
           <SiteMenu />
           <Body style={{ paddingLeft: 18, paddingRight: 18, textAlign: "center" }}>
             <p>
-              starts at: {new Date(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).toLocaleString()}
+              starts at: {new Date(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).toLocaleString()} (
+              {dayjs(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).fromNow()})
             </p>
             <p>current chain time: {new Date(blockchainInfo.mediantime * 1000).toLocaleString()}</p>
           </Body>
@@ -116,9 +119,12 @@ export default function Blocks() {
                 <CannotLockInInfo>
                   The current period cannot lock in {forkName}.
                   <br />
-                  The next period starts in
-                  {/* {" " + formatDistanceToNow(addMinutes(new Date(), blocksLeftInThisPeriod * 10), {}) + " "}(
-                  {blocksLeftInThisPeriod} block{blocksLeftInThisPeriod > 1 && "s"}) */}
+                  The next period starts
+                  {" " +
+                    dayjs()
+                      .add(blocksLeftInThisPeriod * 10, "minutes")
+                      .fromNow()}{" "}
+                  ({blocksLeftInThisPeriod} block{blocksLeftInThisPeriod > 1 && "s"})
                 </CannotLockInInfo>
               )}
               <DescriptionBlock>
@@ -129,7 +135,6 @@ export default function Blocks() {
               {blocks.length > 0 && <ProgressBar />}
               <TopSection>
                 <CurrentPeriod>Current signalling period of {config.minerWindow} blocks (2 weeks)</CurrentPeriod>
-                {/* <LockinInfo>90% of blocks within the period have to signal.</LockinInfo> */}
                 <LockinInfo>
                   {lockedIn && <>{forkName.toUpperCase()} IS LOCKED IN FOR DEPLOYMENT!</>}
                   {!lockedIn && (
