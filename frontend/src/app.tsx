@@ -61,7 +61,7 @@ function StoreStarter(props: any) {
     <ThemeProvider theme={currentTheme}>
       <>
         <Helmet>
-          <title>{forkName} activation</title>
+          <title>{forkName} activation | Fork Watch | HTools</title>
           <link rel="stylesheet" href="/reset.css" />
           <link rel="stylesheet" href="/site.css" />
           <link rel="icon" type="image/png" href="/assets/favicon.ico" />
@@ -71,17 +71,14 @@ function StoreStarter(props: any) {
               <meta name="twitter:card" content="summary" />
               <meta name="twitter:site" content={twitterHandle} />
               <meta name="twitter:creator" content={twitterHandle} />
+              <meta name="twitter:image" content="https://i.imgur.com/Znob3Qw.png" />
+              <meta property="og:image" content="https://i.imgur.com/Znob3Qw.png" />
+              <meta property="og:url" content="https://forkwatch.htools.work" />
+              <meta property="og:title" content={`${forkName} Activation - Fork Watch | HTools`} />
               <meta
-                name="twitter:image"
-                content="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/54056/carrot-emoji-clipart-md.png"
+                property="og:description"
+                content={`See the current signalling status of the ${forkName} softfork.`}
               />
-              <meta
-                property="og:image"
-                content="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/54056/carrot-emoji-clipart-md.png"
-              />
-              <meta property="og:url" content="https://taproot.watch" />
-              <meta property="og:title" content={`${forkName} Activation`} />
-              <meta property="og:description" content="See the current signalling status of the {forkName} softfork." />
             </>
           )}
         </Helmet>

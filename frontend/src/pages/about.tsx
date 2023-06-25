@@ -21,6 +21,7 @@ const Header = styled(CommonHeader)`
 
 const InfoContainer = styled.div`
   max-width: 980px;
+  line-height: 1.5rem;
 `;
 
 const InfoSection = styled.div``;
@@ -68,7 +69,7 @@ export default function Blocks() {
         <Body>
           <InfoContainer>
             <InfoSection>
-              <Header>Information about the softfork {forkName}</Header>
+              <Header>Information about the softfork</Header>
               {config.frontend.about?.softfork?.info?.map((section, i) => (
                 <Text key={i}>{section}</Text>
               ))}
@@ -82,22 +83,15 @@ export default function Blocks() {
             <InfoSection>
               <Header>About this site</Header>
               <Text>
-                <a href="https://github.com/hsjoberg/fork-explorer" target="_blank">
-                  fork-explorer
+                This website tracks soft forks for the{" "}
+                <a href="https://handshake.org" target="_blank" rel="noopener noreferrer">
+                  Handshake
                 </a>{" "}
-                is an on open-source project. Both this site and the open-source project is developed and maintained by
-                Hampus Sjöberg (
-                <a href="https://twitter.com/hampus_s" target="_blank">
-                  @hampus_s
+                blockchain. It is based on{" "}
+                <a href="https://github.com/hsjoberg/fork-explorer" target="_blank" rel="noopener noreferrer">
+                  fork-explorer
                 </a>
-                ).
-              </Text>
-              <Text>
-                If you enjoy this site, leave a Lightning Network donation below or check out my other project{" "}
-                <a href="https://blixtwallet.github.io" target="_blank">
-                  Blixt Wallet
-                </a>
-                , a non-custodial Bitcoin Lightning Wallet!
+                , created for Bitcoin.
               </Text>
             </InfoSection>
           </InfoContainer>
