@@ -4,6 +4,11 @@ import config from "../../frontend/src/config/config.ts";
 
 export const Video: RouterMiddleware<any, any, any> = async ({ request, response }) => {
   try {
+    if (!config.frontend.celebrate) {
+      response.status = 404;
+      return;
+    }
+
     const range = request.headers.get("range");
 
     const fileName = `frontend/public/${config.frontend.celebrate?.path}`;

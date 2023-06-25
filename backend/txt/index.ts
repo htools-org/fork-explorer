@@ -1,5 +1,3 @@
-import { bech32 } from "https://esm.sh/bech32?esnext";
-
 import config from "../../frontend/src/config/config.ts";
 import { getBlocks } from "../blocks/index.ts";
 import { computeStats, computeMiners } from "../../frontend/src/common/data.ts";
