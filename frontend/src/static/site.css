@@ -55,3 +55,12 @@ body {
 svg {
   overflow: visible;
 }
+
+.info-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.info-links > a:link, .info-links > a:visited {
+  color: unset;
+}
