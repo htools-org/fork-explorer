@@ -95,7 +95,7 @@ export default function Blocks() {
               starts at: {new Date(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).toLocaleString()} (
               {dayjs(blockchainInfo.softforks[config.fork.codename]?.startTime * 1000).fromNow()})
             </p>
-            <p>current chain time: {new Date(blockchainInfo.mediantime * 1000).toLocaleString()}</p>
+            <p>current chain time: {new Date(blockchainInfo.mediantime * 1000).toUTCString()}</p>
           </Body>
         </ContentWide>
       </Container>
