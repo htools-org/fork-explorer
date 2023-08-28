@@ -47,7 +47,7 @@ const miners: IMiners = {
       link: "https://antpool.com",
     },
     hs1q6yghkpywfarhn4849h7tzfuthk9gupa2vsk8vr: {
-      name: "Mining-Dutch Pools",
+      name: "Mining-DutchPools",
       link: "https://www.mining-dutch.nl/pools/handshake.php",
     },
   },
