@@ -61,6 +61,11 @@ svg {
   gap: 1rem;
 }
 
-.info-links > a:link, .info-links > a:visited {
+.info-links > a:link,
+.info-links > a:visited {
   color: unset;
+}
+
+ul.details-list > li {
+  margin-bottom: 1rem;
 }
