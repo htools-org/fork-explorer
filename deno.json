@@ -1,7 +1,7 @@
 {
   "tasks": {
     "dev": "mode=dev deno run --unstable --allow-net --allow-read --allow-write --allow-run --allow-env --no-check index.ts",
-    "prod": "importMap=importMap.json deno run --unstable --allow-net --allow-read --allow-write --allow-run --allow-env --no-check index.ts"
+    "prod": "importMap=importMap.json deno run --unstable --allow-net --allow-read --allow-write --allow-run --allow-env --allow-import --no-check index.ts"
   },
   "importMap": "importMap.json"
 }

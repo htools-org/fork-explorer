@@ -1,4 +1,4 @@
-import { RouterMiddleware } from "https://deno.land/x/oak@v10.5.1/mod.ts";
+import { RouterMiddleware } from "https://deno.land/x/oak@v17.1.4/mod.ts";
 
 export const GetPeriods: RouterMiddleware<any, any, any> = async (context) => {
   try {

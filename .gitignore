@@ -5,6 +5,7 @@ vendorMap.json
 
 dist
 frontend/src/config/config.ts
+frontend/src/config/config.*.ts
 pageviews.json
 pageviews_txt.json
 lnurlpay.json

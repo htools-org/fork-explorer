@@ -1,4 +1,4 @@
-import { Router } from "https://deno.land/x/oak@v10.5.1/mod.ts";
+import { Router } from "https://deno.land/x/oak@v17.1.4/mod.ts";
 
 import { GetBlocks } from "./blocks.ts";
 import { GetPeriod } from "./period.ts";
