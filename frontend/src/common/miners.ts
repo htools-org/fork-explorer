@@ -50,6 +50,21 @@ const miners: IMiners = {
       name: "Mining-DutchPools",
       link: "https://www.mining-dutch.nl/pools/handshake.php",
     },
+    hs1qqymxtl5ul7ee99dpdcq79ss0993jekeu03jw8a: {
+      // added on 2025-07-02
+      name: "Mining-DutchPools",
+      link: "https://www.mining-dutch.nl/pools/handshake.php",
+    },
+    hs1q8vt20lqq5kd8nl9wsh9l5wh6xkqnchfl4sckr5: {
+      // added on 2025-07-02
+      name: "Cyberpool",
+      link: "https://cyberpool.io/#hns",
+    },
+    hs1qxtya4m2kf62gplm2g60fv50y8z7d0dqezvhhyw: {
+      // added on 2025-07-02
+      name: "Cédric CRISPIN",
+      link: "https://handshake.cedric-crispin.com",
+    },
   },
 };
 export default miners;
