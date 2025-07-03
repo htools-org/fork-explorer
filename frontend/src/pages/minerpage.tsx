@@ -70,7 +70,7 @@ export default function Minersx(props: { miner: string }) {
                 <MinerBlock key={block.height}>
                   <Text>
                     {block.signals ? "✅ " : "🚫"} Block #
-                    <Link href={`https://hnsnetwork.com/blocks/${block.height}`} target="_blank">
+                    <Link href={`https://shakeshift.com/block/${block.height}`} target="_blank">
                       {block.height}
                     </Link>
                     <Locate href={`/?block=${block.height}`}>🔍</Locate>
