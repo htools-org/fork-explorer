@@ -182,7 +182,7 @@ const airstop = {
   fork: {
     name: "Airstop",
     codename: "airstop",
-    info: ["End Airdorp Claims"],
+    info: ["Soft fork that ends airdrop claims"],
     versionBit: 2,
     threshold: network === "mainnet" ? 1916 : 108,
     status: "defined",
@@ -271,7 +271,7 @@ const airstop = {
             React.createElement(
               "li",
               null,
-              "BIP-9 signalling by miners takes place from 10th August 2023 to 31th December 2023."
+              "BIP-9 signalling by miners takes place from 1st July 2025 to 8th October 2025."
             ),
             React.createElement(
               "li",
