@@ -55,6 +55,11 @@ const miners: IMiners = {
       name: "Mining-DutchPools",
       link: "https://www.mining-dutch.nl/pools/handshake.php",
     },
+    hs1qu0x727w6guque3fzszpfameplp8hj8ur2tenty: {
+      // added on 2025-07-11
+      name: "Mining-DutchPools",
+      link: "https://www.mining-dutch.nl/pools/handshake.php",
+    },
     hs1q8vt20lqq5kd8nl9wsh9l5wh6xkqnchfl4sckr5: {
       // added on 2025-07-02
       name: "Cyberpool",
